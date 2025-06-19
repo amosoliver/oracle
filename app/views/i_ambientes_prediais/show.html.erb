@@ -1,0 +1,32 @@
+<div class="container">
+  <%= render "shared/notice" %>
+  <div class="card border-0 shadow shadow-sm">
+    <div class="card-header border-0 d-flex justify-content-between">
+      <span class="fs-4">Visualizar I Ambiente Predial</span>
+    </div>
+    <div class="card-body">
+      <div id="<%= dom_id @i_ambiente_predial %>">
+              
+          <p>
+            <strong>Descricao:</strong>
+            <%= @i_ambiente_predial.descricao %>
+          </p>
+              
+          <p>
+            <strong>I Predio:</strong>
+            <%= @i_ambiente_predial.i_predio %>
+          </p>
+     
+      </div>
+    </div>
+    <div class="card-footer border-0 d-flex justify-content-between">
+      <div>
+        <%= link_to edit_i_ambiente_predial_path(@i_ambiente_predial), class: "btn btn-primary" do %>
+          <i class="bi bi-pencil-square"></i> Editar
+        <% end %>
+        <%= link_to "Voltar", i_ambientes_prediais_path, class: "btn btn-secondary" %>
+      </div>
+      <%= button_to "Deletar", @i_ambiente_predial, method: :delete, class: "btn btn-outline-danger border-0" %>
+    </div>
+  </div>
+</div>

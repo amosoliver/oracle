@@ -1,0 +1,2 @@
+module IPrediosHelper
+end

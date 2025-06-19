@@ -1,0 +1,44 @@
+pt-BR:
+  activerecord:
+    models:
+      g_estado:
+        one: "Estado"
+        other: "Estados"
+      g_municipio:
+        one: "Município"
+        other: "Municípios"
+      g_pais:
+        one: "País"
+        other: "Países"
+      i_ambiente_predial:
+        one: "Ambiente Predial"
+        other: "Ambientes Prediais"
+      i_predio:
+        one: "Prédio"
+        other: "Prédios"
+    attributes:
+      g_estado:
+        descricao: "Descrição"
+        g_pais: "País"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      g_municipio:
+        descricao: "Descrição"
+        g_estado: "Estado"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      g_pais:
+        descricao: "Descrição"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      i_ambiente_predial:
+        descricao: "Descrição"
+        i_predio: "Prédio"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      i_predio:
+        nome_fantasia: "Nome Fantasia"
+        cnpj: "CNPJ"
+        g_municipio: "Município"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"

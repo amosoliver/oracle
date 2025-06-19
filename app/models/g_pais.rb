@@ -1,0 +1,2 @@
+class GPais < ApplicationRecord
+end
