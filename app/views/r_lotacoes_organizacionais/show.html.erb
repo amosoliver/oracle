@@ -1,0 +1,32 @@
+<div class="container">
+  <%= render "shared/notice" %>
+  <div class="card border-0 shadow shadow-sm">
+    <div class="card-header border-0 d-flex justify-content-between">
+      <span class="fs-4">Visualizar R Lotacao Organizacional</span>
+    </div>
+    <div class="card-body">
+      <div id="<%= dom_id @r_lotacao_organizacional %>">
+              
+          <p>
+            <strong>R Contrato Servidor:</strong>
+            <%= @r_lotacao_organizacional.r_contrato_servidor %>
+          </p>
+              
+          <p>
+            <strong>R Estrutura Organizacional:</strong>
+            <%= @r_lotacao_organizacional.r_estrutura_organizacional %>
+          </p>
+     
+      </div>
+    </div>
+    <div class="card-footer border-0 d-flex justify-content-between">
+      <div>
+        <%= link_to edit_r_lotacao_organizacional_path(@r_lotacao_organizacional), class: "btn btn-primary" do %>
+          <i class="bi bi-pencil-square"></i> Editar
+        <% end %>
+        <%= link_to "Voltar", r_lotacoes_organizacionais_path, class: "btn btn-secondary" %>
+      </div>
+      <%= button_to "Deletar", @r_lotacao_organizacional, method: :delete, class: "btn btn-outline-danger border-0" %>
+    </div>
+  </div>
+</div>

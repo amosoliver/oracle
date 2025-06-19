@@ -1,0 +1,1 @@
+json.partial! "r_estruturas_organizacionais/r_estrutura_organizacional", r_estrutura_organizacional: @r_estrutura_organizacional

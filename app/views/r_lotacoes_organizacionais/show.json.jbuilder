@@ -1,0 +1,1 @@
+json.partial! "r_lotacoes_organizacionais/r_lotacao_organizacional", r_lotacao_organizacional: @r_lotacao_organizacional

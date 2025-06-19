@@ -1,0 +1,2 @@
+module REstruturasOrganizacionaisHelper
+end

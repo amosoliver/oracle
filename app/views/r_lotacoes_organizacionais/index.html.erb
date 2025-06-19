@@ -1,0 +1,59 @@
+<%= render "shared/context_nav", title: t("activerecord.models.#{RLotacaoOrganizacional.model_name.i18n_key}.other"), new_path: new_r_lotacao_organizacional_path do  %>
+  <span class="breadcrumb-item active"><%= t("activerecord.models.#{RLotacaoOrganizacional.model_name.i18n_key}.other") %></span>
+<% end %>
+<div class="card">
+
+  <div class="card-body">
+    <%= render "shared/notice" %>
+    <div class= "table-responsive">
+      <table class="table table-sm table-bordered table-striped">        
+        <thead>
+          <th class="text-center col-1">Ações</th>
+          <tr>
+            
+              
+                <th><%= sort_link(@q, :r_contrato_servidor, t("activerecord.attributes.r_lotacao_organizacional.r_contrato_servidor")) %></th>
+              
+              
+                <th><%= sort_link(@q, :r_estrutura_organizacional, t("activerecord.attributes.r_lotacao_organizacional.r_estrutura_organizacional")) %></th>
+              
+            
+          </tr>
+        </thead>
+        <tbody>
+          <% @r_lotacoes_organizacionais.each do |r_lotacao_organizacional| %>
+            <tr>
+              <td class="text-center">
+                <div class="dropdown-toggle">
+                  <a href="#" class="text-body dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="ph-gear"></i>
+                  </a>
+                  <div class="dropdown-menu" style="">
+                    <div class="dropdown-header">Opções</div>
+                    <%= link_to edit_r_lotacao_organizacional_path(r_lotacao_organizacional), class: "dropdown-item" do %>
+                      <i class="ph-pen me-2"></i> Editar
+                    <% end %>
+                    <%= form_for r_lotacao_organizacional, method: :delete do |f| %>
+                      <a class="dropdown-item hand-pointer " data-confirm-delete="<%= r_lotacao_organizacional_path(r_lotacao_organizacional) %>" data-csrf-token="<%= form_authenticity_token %>">
+                        <i class="ph-trash-simple me-2"></i>Excluir
+                      </a>
+                    <% end %>
+                  </div>
+                </div>
+              </td>
+                
+                  <td><%= r_lotacao_organizacional.r_contrato_servidor %></td>
+                
+                
+                  <td><%= r_lotacao_organizacional.r_estrutura_organizacional %></td>
+                
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= render "shared/pagy", pagy: @pagy %>
+  </div>
+</div>

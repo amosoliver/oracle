@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :r_lotacoes_organizacionais
+  resources :r_estruturas_organizacionais
+  resources :r_organizacionais
+  resources :r_contrato_servidores
+  resources :r_cargos
+  resources :g_pessoas
+  resources :r_tipos_organizacionais
   resources :i_predios do
     resources :i_ambientes_prediais, shallow: true
   end
