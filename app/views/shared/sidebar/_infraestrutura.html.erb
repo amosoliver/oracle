@@ -1,0 +1,19 @@
+<% links = [
+  { controller: "i_predios",                       model: IPredio,                    icon: "ph-buildings",        path: i_predios_path },
+  { controller: "i_acordos",                       model: IAcordo,                    icon: "ph-handshake",        path: i_acordos_path },
+  { controller: "i_extensoes",                     model: IExtensao,                  icon: "ph-house-line",       path: i_extensoes_path },
+  { controller: "i_checklists",                    model: IChecklist,                 icon: "ph-check-square",     path: i_checklists_path },
+  { controller: "i_inspecoes",                     model: IInspecao,                  icon: "ph-magnifying-glass", path: i_inspecoes_path },
+  { controller: "i_memoriais_descritivos_terreno", model: IMemorialDescritivoTerreno, icon: "ph-ruler",            path: i_memoriais_descritivos_terreno_path }
+] %>
+<% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+<% if visible_nav_itens.any? %>
+  <% visible_nav_itens.each do |link| %>
+    <li class="nav-item">
+      <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}", style: "padding-left: 40px !important;" do %>
+        <i class="<%= link[:icon] %>"></i>
+        <%= t("activerecord.models.#{link[:model].model_name.i18n_key}.other") %>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

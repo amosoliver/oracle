@@ -1,0 +1,10 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= truncate(@e_componente_grade.e_componente_curricular.descricao.titleize.upcase, length: 60) %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to edit_e_matriz_curricular_e_periodo_grade_e_componente_grade_path(@e_matriz_curricular, @e_periodo_grade, @e_componente_grade), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+  </div>
+</div>

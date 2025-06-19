@@ -1,0 +1,13 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= truncate(@a_acordao.descricao.titleize, length: 40) %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to edit_a_acordao_path(@a_acordao), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+    <%= link_to a_acordao_a_achados_path(@a_acordao), class: "dropdown-item" do %>
+      <i class="ph-suitcase-simple me-2"></i> Achados
+    <% end %>
+  </div>
+</div>

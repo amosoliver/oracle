@@ -1,0 +1,13 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= truncate(@a_tarefa.descricao.titleize, length: 40) %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to edit_a_acordao_a_achado_a_tarefa_path(@a_acordao, @a_achado, @a_tarefa), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+    <%= link_to a_acordao_a_achado_a_tarefa_a_atividades_path(@a_acordao, @a_achado, @a_tarefa), class: "dropdown-item" do %>
+      <i class="ph-suitcase-simple me-2"></i> Atividades
+    <% end %>
+  </div>
+</div>

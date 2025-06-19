@@ -1,0 +1,14 @@
+<% links = [
+  { controller: "p_equipes", model: PEquipe, icon: "ph-chart-line", path: p_equipes_path }
+] %>
+<% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+<% if visible_nav_itens.any? %>
+  <% visible_nav_itens.each do |link| %>
+    <li class="nav-item">
+      <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}" do %>
+        <i class="<%= link[:icon] %>"></i>
+        <%= "Metas" %>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

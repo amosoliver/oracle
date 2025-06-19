@@ -1,0 +1,99 @@
+<% if can? :index, ICorrecaoMonetaria %>
+  <li class="nav-item nav-item-submenu">
+    <a class="nav-link <%= "active" if "relatorios".include?(params[:controller] ) %>" style="padding-left: 40px !important;">
+      <i class="ph-house-line"></i>
+      <span>
+        Imóveis
+      </span>
+    </a>
+    <ul class="nav-group-sub collapse">
+      <li class="nav-item">
+        <%= link_to i_correcoes_monetarias_path, class: "nav-link" do %>
+          <i class="ph-calculator"></i>
+          Avaliação de Imóveis
+        <% end %>
+      </li>
+      <li class="nav-item nav-item-submenu">
+        <a class="nav-link" style="padding-left: 80px !important;">
+          <i class="ph-book"></i>
+          <span>
+            Demonstrativos
+          </span>
+        </a>
+        <ul class="nav-group-sub collapse">
+          <li class="nav-item">
+            <%= link_to "TC16", correcoes_monetarias_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "TC16 Analítico", tc16_analitico_path(format: :html), class: "nav-link", target: "_blank" %>
+            <%= link_to "TC16 Analítico (Excel)", tc16_analitico_path(format: :xlsx), class: "nav-link", target: "_blank" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "TC16 Sintético", tc16_sintetico_path(format: :html), class: "nav-link", target: "_blank" %>
+            <%= link_to "TC16 Sintético (Excel)", tc16_sintetico_path(format: :xlsx), class: "nav-link", target: "_blank" %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>
+<li class="nav-item nav-item-submenu">
+  <a class="nav-link <%= "active" if "relatorios".include?(params[:controller] ) %>" style="padding-left: 40px !important;">
+    <i class="ph-armchair"></i>
+    <span>
+      Móveis
+    </span>
+  </a>
+  <ul class="nav-group-sub collapse bg-black bg-opacity-20">
+    <li class="nav-item">
+      <%= link_to l_comissoes_moveis_path, class: "nav-link" do %>
+        <i class="ph-calculator"></i>
+        Comissões Inventários Móveis
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to l_gestao_bens_moveis_index_path, class: "nav-link" do %>
+        <i class="ph-desktop-tower"></i>
+        Gestão de bens móveis
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to i_tipos_equipamentos_path, class: "nav-link" do %>
+        <i class="ph-desktop-tower"></i>
+       Tipos de Móveis
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to i_familias_equipamentos_path, class: "nav-link" do %>
+        <i class="ph-desktop-tower"></i>
+       Familias de Móveis
+      <% end %>
+    </li>
+  </ul>
+</li>
+
+<li class="nav-item nav-item-submenu">
+  <a class="nav-link <%= "active" if "relatorios".include?(params[:controller] ) %>" style="padding-left: 40px !important;">
+    <i class="ph-suitcase"></i>
+    <span>
+      Inventários
+    </span>
+  </a>
+  <ul class="nav-group-sub collapse bg-black bg-opacity-20">
+    <li class="nav-item">
+      <%= link_to l_almoxarifados_path, class: "nav-link" do %>
+        Almoxarifados
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to l_comissoes_inventarios_path, class: "nav-link" do %>
+        Comissões Inventários
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to l_notas_ajustes_inventarios_path, class: "nav-link" do %>
+        Notas de Ajuste
+      <% end %>
+    </li>
+  </ul>
+</li>

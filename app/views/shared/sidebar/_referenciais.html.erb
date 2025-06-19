@@ -1,0 +1,714 @@
+<li class="nav-item">
+  <% if can? :index, GSedamIcmsArea%>
+    <li class="nav-item nav-item-submenu">
+      <a href="#" class="nav-link" style="padding-left: 40px !important;">
+        <i class="ph-tree"></i>
+        <span>
+          SEDAM
+        </span>
+      </a>
+      <ul class="nav-group-sub collapse bg-black bg-opacity-20">
+        <li class="nav-item nav-item-submenu">
+          <% icms = [ "g_sedam_icms_areas" ] %>
+          <a class="nav-link <%= "active" if icms.include?(params[:controller] ) %>">
+            <i class="ph-map-trifold"></i>
+            <span>
+              ICMS SEDAM
+            </span>
+          </a>
+          <ul class="nav-group-sub collapse bg-black bg-opacity-20">
+            <li class="nav-item">
+              <%= link_to t("activerecord.models.#{GSedamIcmsArea.model_name.i18n_key}.other"), g_sedam_icms_areas_path, class: "nav-link" %>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  <% end %>
+  <li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link" id="globais-link" style="padding-left: 40px !important;">
+      <i class="ph-diamonds-four"></i>
+      <span>
+        Geral
+      </span>
+    </a>
+    <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="globais-collapse">
+      <li class="nav-item nav-item-submenu">
+        <% complementar = [
+            "g_parentescos",
+            "g_tipos_certidoes_civis",
+            "g_tipos_moradias",
+            "g_deficiencias",
+            "g_racas",
+            "g_categorias_cnh",
+            "g_cartorios"
+          ] %>
+        <% links = [
+            { model: GCartorio,          path: g_cartorios_path },
+            { model: GCategoriaCnh,      path: g_categorias_cnh_path },
+            { model: GDeficiencia,       path: g_deficiencias_path },
+            { model: GEstadoCivil,       path: g_estados_civis_path },
+            { model: GParentesco,        path: g_parentescos_path },
+            { model: GRaca,              path: g_racas_path },
+            { model: GTipoCertidaoCivil, path: g_tipos_certidoes_civis_path },
+            { model: GTipoMoradia,       path: g_tipos_moradias_path }
+          ] %>
+        <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+        <% if visible_nav_itens.any? %>
+          <li class="nav-item nav-item-submenu">
+            <a class="nav-link <%= " active" if complementar.include?(params[:controller]) %>" id="complementar-link">
+              <i class="ph-circles-three-plus"></i>
+              <span>Complementar</span>
+            </a>
+            <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="complementar-collapse">
+              <% visible_nav_itens.each_with_index do |link, index| %>
+                <li class="nav-item">
+                  <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link", id: "nav-link-#{index}" %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+        <% escolaridade = [
+            "g_cursos",
+            "g_areas",
+            "g_tipos_niveis_escolaridades"
+          ] %>
+        <% links = [
+            { model: GCurso,                 path: g_cursos_path },
+            { model: GArea,                  path: g_areas_path },
+            { model: GIdioma,                path: g_idiomas_path },
+            { model: GInstituicao,           path: g_instituicoes_path },
+            { model: GTipoNivelEscolaridade, path: g_tipos_niveis_escolaridades_path }
+          ] %>
+        <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+        <% if visible_nav_itens.any? %>
+          <li class="nav-item nav-item-submenu">
+            <a class="nav-link <%= " active" if escolaridade.include?(params[:controller]) %>" id="escolaridade-link">
+              <i class="ph-books"></i>
+              <span>Escolaridade</span>
+            </a>
+            <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="escolaridade-collapse">
+              <% visible_nav_itens.each do |link| %>
+                <li class="nav-item">
+                  <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+        <% global = [
+            "g_cres",
+            "g_dicionarios",
+            "g_secretarias",
+            "g_sistemas"
+          ] %>
+        <% links = [
+            { model: GCre,        path: g_cres_path },
+            { model: GDicionario, path: g_dicionarios_path },
+            { model: GSecretaria, path: g_secretarias_path },
+            { model: GSistema,    path: g_sistemas_path },
+          ] %>
+        <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+        <% if visible_nav_itens.any? %>
+          <li class="nav-item nav-item-submenu">
+            <a class="nav-link <%= " active" if global.include?(params[:controller]) %>" id="global-link">
+              <i class="ph-globe-hemisphere-west"></i>
+              <span>Global</span>
+            </a>
+            <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="global-collapse">
+              <% visible_nav_itens.each do |link| %>
+                <li class="nav-item">
+                  <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+        <% localizacao = [
+            "g_distritos",
+            "g_estados",
+            "g_localidades",
+            "g_municipios",
+            "g_nacionalidades",
+            "g_paises"
+          ] %>
+        <% links = [
+            { model: GDistrito,      path: g_distritos_path },
+            { model: GEstado,        path: g_estados_path },
+            { model: GLocalidade,    path: g_localidades_path },
+            { model: GMunicipio,     path: g_municipios_path },
+            { model: GNacionalidade, path: g_nacionalidades_path },
+            { model: GPais,          path: g_paises_path }
+          ] %>
+        <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+        <% if visible_nav_itens.any? %>
+          <li class="nav-item nav-item-submenu">
+            <a class="nav-link <%= " active" if localizacao.include?(params[:controller]) %>" id="localizacao-link">
+              <i class="ph-map-pin active"></i>
+              <span>Localização</span>
+            </a>
+            <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="localizacao-collapse">
+              <% visible_nav_itens.each do |link| %>
+                <li class="nav-item">
+                  <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+        <% treinamento = [
+            "g_dimensoes",
+            "g_divisoes",
+            "g_modalidades",
+            "g_tipos_cursos"
+          ] %>
+        <% links = [
+            { model: GDimensao,          path: g_dimensoes_path },
+            { model: GDivisao,           path: g_divisoes_path },
+            { model: GInstituicao,       path: g_instituicoes_path },
+            { model: GIdioma,            path: g_idiomas_path },
+            { model: GModalidade,        path: g_modalidades_path },
+            { model: GStatusTreinamento, path: g_status_treinamentos_path },
+            { model: GTipoCurso,         path: g_tipos_cursos_path }
+          ] %>
+        <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+        <% if visible_nav_itens.any? %>
+          <li class="nav-item nav-item-submenu">
+            <a class="nav-link <%= " active" if treinamento.include?(params[:controller]) %>" id="treinamento-link">
+              <i class="ph-chalkboard-teacher"></i>
+              <span>Treinamento</span>
+            </a>
+            <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="treinamento-collapse">
+              <% visible_nav_itens.each do |link| %>
+                <li class="nav-item">
+                  <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </li>
+    </ul>
+  </li>
+  <li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link" id="recursos-link" style="padding-left: 40px !important;">
+      <i class="ph-users-three"></i>
+      <span>Recursos Humanos</span>
+    </a>
+    <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="recursos-collapse">
+      <% rh = [
+          "r_ambito",
+          "r_cargo",
+          "r_categoria_cid",
+          "r_causa_inicio_fim",
+          "r_cbo",
+          "r_funcao",
+          "g_area",
+          "r_movimentacoes", 
+          "r_tipos_movimentacoes", 
+          "r_motivos_cessoes_lotacoes",
+          "r_natureza_administracoes",
+          "r_classe_nivel",
+          "r_orgao_origem_destino",
+          "r_ocorrencia_servidor",
+          "r_referencial",
+          "r_regimes_juridico",
+          "r_rubrica",
+          "r_situacao",
+          "r_tipo_administracoes",
+          "r_tipo_cargo_funcao",
+          "r_tipo_cedencias",
+          "r_tipo_averbacao",
+          "r_situacao_averbacao"
+        ] %>
+      <% links = [
+          { model: RAmbito,               path: r_ambitos_path },
+          { model: RCargo,                path: r_cargos_path },
+          { model: RCategoriaCid,         path: r_categorias_cid_path },
+          { model: RCausaInicioFim,       path: r_causa_inicio_fins_path },
+          { model: RCbo,                  path: r_cbos_path },
+          { model: RFuncao,               path: r_funcoes_path },
+          { model: GArea,                 path: g_areas_path },
+          { model: RMovimentacao,         path: r_movimentacoes_path },
+          { model: RTipoMovimentacao,     path: r_tipos_movimentacoes_path },
+          { model: RMotivoCessaoLotacao,  path: r_motivos_cessoes_lotacoes_path },
+          { model: RNaturezaJuridica,     path: r_natureza_juridicas_path },
+          { model: RClasseNivel,          path: r_classe_niveis_path },
+          { model: ROrgaoOrigemDestino,   path: r_orgao_origem_destinos_path },
+          { model: ROcorrenciaServidor,   path: r_ocorrencia_servidores_path },
+          { model: RReferencial,          path: r_referenciais_path },
+          { model: RRegimesJuridico,      path: r_regimes_juridicos_path },
+          { model: RRubrica,              path: r_rubricas_path },
+          { model: RSituacao,             path: r_situacoes_path },
+          { model: RTipoAdministracao,    path: r_tipo_administracoes_path },
+          { model: RTipoCargoFuncao,      path: r_tipo_cargos_funcoes_path },
+          { model: RTipoCedencia,         path: r_tipo_cedencias_path },
+          { model: RTipoAverbacao,        path: r_tipos_averbacoes_path },
+          { model: RSituacaoAverbacao,    path: r_situacoes_averbacoes_path }
+        ] %>
+      <% links.each do |link| %>
+        <% if can? :index, link[:model]%>
+          <li class="nav-item">
+            <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </li>
+  <li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link" id="planos-link" style="padding-left: 40px !important;">
+      <i class="ph-address-book"></i>
+      <span>Plano de Ação</span>
+    </a>
+    <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="planos-collapse">
+      <% planos = [
+            "p_identificacao_indicadores",
+            "p_prioridades",
+            "p_situacoes",
+            "p_resultados_desejados"
+
+          ] %>
+      <% links = [
+            { model: PIdentificacaoIndicador, path: p_identificacao_indicadores_path },
+            { model: PPrioridade,             path: p_prioridades_path },
+            { model: PSituacao,               path: p_situacoes_path },
+            { model: PResultadoDesejado,      path: p_resultados_desejados_path }
+          ] %>
+      <% links.each do |link| %>
+        <% if can? :index, link[:model]%>
+          <li class="nav-item">
+            <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </li>
+  <li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link" id="infraestrutura-link" style="padding-left: 40px !important;">
+      <i class="ph-buildings"></i>
+      <span>
+        Infraestrutura
+      </span>
+    </a>
+    <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="infraestrutura-collapse">
+      <% acordos = [ 
+        "i_categorias_acordos",
+        "i_itens_acordos",
+        "i_patrocinadores",
+        "i_status_acordos",
+        "i_tipos_itens_acordos",
+        "i_contratados",
+        "i_inspecoes",
+        "i_portarias",
+        "i_status_notificacoes",
+        "i_niveis_acordo",
+        "i_tipos_aditivos",
+        "i_tipos_acordo",
+        "i_tipos_fornecimentos_execucao",
+        "i_familias_servicos_acordos",
+        "i_servicos_acordos",
+        "i_valores_empenhados" 
+      ] %>
+      <% links = [
+        { model: ICategoriaAcordo,          path: i_categorias_acordos_path },
+        { model: IContratado,               path: i_contratados_path },
+        { model: IFamiliaServicoAcordo,     path: i_familias_sevicos_acordos_path },
+        { model: IFiscal,                   path: i_fiscais_path },
+        { model: IItemAcordo,               path: i_itens_acordos_path },
+        { model: IModalidadeLicitacao,      path: i_modalidades_licitacoes_path },
+        { model: INivelAcordo,              path: i_niveis_acordo_path },
+        { model: IPatrocinador,             path: i_patrocinadores_path },
+        { model: IPortaria,                 path: i_portarias_path },
+        { model: IServicoAcordo,            path: i_servicos_acordos_path },
+        { model: IStatusAcordo,             path: i_status_acordos_path },
+        { model: IStatusNotificacao,        path: i_status_notificacoes_path },
+        { model: ITipoAcordo,               path: i_tipos_acordo_path },
+        { model: ITipoAditivo,              path: i_tipos_aditivos_path },
+        { model: ITipoFornecimentoExecucao, path: i_tipos_fornecimentos_execucao_path },
+        { model: ITipoItemAcordo,           path: i_tipos_itens_acordos_path }
+      ] %>
+      <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+      <% if visible_nav_itens.any? %>
+        <li class="nav-item nav-item-submenu">
+          <a class="nav-link <%= " active" if acordos.include?(params[:controller]) %>" id="acordos-link">
+            <i class="ph-handshake"></i>
+            <span>Acordos</span>
+          </a>
+          <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="acordos-collapse">
+            <% visible_nav_itens.each do |link| %>
+              <li class="nav-item">
+                <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <% predial = [
+          "i_ambientes_prediais",
+          "i_tipos_ambientes_prediais",
+          "i_tipologias_escolas",
+          "i_tipos_predios",
+          "i_tipos_equipamentos",
+          "i_predios_tratamentos_lixo",
+          "i_predios_esgotos_sanitario",
+          "i_itens_inpecoes",
+          "i_predios_tipos_abastecimento",
+          "i_predios_tipos_energia_eletrica",
+          "i_andares",
+          "i_predios_tipos_localizacoes_diferenciadas",
+          "i_predios_mantenedores_proprietarios",
+          "i_predios_naturezas_ocupacao",
+          "i_contas_contabeis",
+          "i_predios_situacoes",
+          "i_conformidades",
+          "i_tipos_inspecao",
+          "g_tipologias_cre"
+        ] %>
+      <% links = [
+          { model: IAndar,                             path: i_andares_path },
+          { model: IConformidade,                      path: i_conformidades_path },
+          { model: IContaContabil,                     path: i_contas_contabeis_path },
+          { model: ICorrecaoMonetaria,                 path: i_correcoes_monetarias_path },
+          { model: IPredioEsgotoSanitario,             path: i_predios_esgotos_sanitario_path },
+          { model: IPredioLocalizacao,                 path: i_predios_localizacoes_path },
+          { model: IPredioMantenedorProprietario,      path: i_predios_mantenedores_proprietarios_path },
+          { model: IPredioNaturezaOcupacao,            path: i_predios_naturezas_ocupacao_path },
+          { model: IPredio,                            path: i_predios_path },
+          { model: IPredioSituacao,                    path: i_predios_situacoes_path },
+          { model: GTipologiaCre,                      path: g_tipologias_cres_path },
+          { model: ITipologiaEscola,                   path: i_tipologias_escolas_path },
+          { model: IPredioTipoAbastecimento,           path: i_predios_tipos_abastecimento_path },
+          { model: ITipoAmbientePredial,               path: i_tipos_ambientes_prediais_path },
+          { model: IPredioTipoEnergiaEletrica,         path: i_predios_tipos_energia_eletrica_path },
+          { model: ITipoEquipamento,                   path: i_tipos_equipamentos_path },
+          { model: ITipoItemInspecao,                  path: i_tipos_itens_inspecoes_path },
+          { model: IPredioTipoLocalizacaoDiferenciada, path: i_predios_tipos_localizacoes_diferenciadas_path },
+          { model: ITipoPredio,                        path: i_tipos_predios_path },
+          { model: IPredioTratamentoLixo,              path: i_predios_tratamentos_lixo_path }
+        ] %>
+      <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+      <% if visible_nav_itens.any? %>
+        <li class="nav-item nav-item-submenu">
+          <a class="nav-link <%= " active" if predial.include?(params[:controller]) %>" id="predial-link">
+            <i class="ph-bounding-box"></i>
+            <span>Gestão Predial</span>
+          </a>
+          <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="predial-collapse">
+            <% visible_nav_itens.each do |link| %>
+              <li class="nav-item">
+                <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <% inspecao = [
+          "i_tipos_itens_inpecoes",
+          "i_itens_inspecoes",
+          "i_relacoes_inspecoes",
+          "i_atividades_inspecoes",
+          "i_status_inspecoes"
+        ] %>
+      <% links = [
+          { model: ITipoItemInspecao,  path: i_tipos_itens_inspecoes_path },
+          { model: IItemInspecao,      path: i_itens_inspecoes_path },
+          { model: IRelacaoInspecao,   path: i_relacoes_inspecoes_path },
+          { model: IAtividadeInspecao, path: i_atividades_inspecoes_path },
+          { model: IStatusInspecao,    path: i_status_inspecoes_path }
+        ] %>
+      <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+      <% if visible_nav_itens.any? %>
+        <li class="nav-item nav-item-submenu">
+          <a class="nav-link <%= " active" if inspecao.include?(params[:controller]) %>" id="inspecao-link">
+            <i class="ph-magnifying-glass"></i>
+            <span>Inspeções</span>
+          </a>
+          <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="inspecao-collapse">
+            <% visible_nav_itens.each do |link| %>
+              <li class="nav-item">
+                <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+  <li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link" id="escolar-link" style="padding-left: 40px !important;">
+      <i class="ph-chalkboard-teacher"></i>
+      <span>
+        Escolar
+      </span>
+    </a>
+    <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="escolar-collapse">
+      <% icms_escolar = [
+            "g_indices_socioeconomicos",
+            "g_taxas_aprovacoes",
+            "g_saero_municipios"
+          ] %>
+      <% links = [
+            { model: GIndiceSocioeconomico, path: g_indices_socioeconomicos_path },
+            { model: GTaxaAprovacao,        path: g_taxas_aprovacoes_path },
+            { model: GSaeroMunicipio,       path: g_saero_municipios_path }
+          ] %>
+      <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+      <% if visible_nav_itens.any? %>
+        <li class="nav-item nav-item-submenu">
+          <a class="nav-link <%= " active" if icms_escolar.include?(params[:controller]) %>" id="icms_escolar-link">
+            <i class="ph-notebook"></i>
+            <span>ICMS Escolar</span>
+          </a>
+          <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="icms_escolar-collapse">
+            <% visible_nav_itens.each do |link| %>
+              <li class="nav-item">
+                <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <% gestao_escolar = [
+            "e_especificidades",
+            "e_atos_normatizacoes",
+            "e_area_conhecimento",
+            "e_modalidades",
+            "e_normatizacoes",
+            "e_etapas",
+            "e_fases",
+            "e_formas_acessos",
+            "e_status_matrizes_curriculares",
+            "e_componente_curricular",
+            "e_obrigatoriedade",
+            "e_tipo_base",
+            "e_bases",
+            "e_tipos_aulas",
+            "e_turno",
+            "e_tipo_campo_atuacao",
+            "e_periodo_letivo",
+            "e_tipo_matriz"
+          ] %>
+      <% links = [
+            { model: EAno,                    path: e_anos_path },
+            { model: EAreaConhecimento,       path: e_areas_conhecimentos_path },
+            { model: EComponenteCurricular,   path: e_componentes_curriculares_path },
+            { model: EEspecificidade,         path: e_especificidades_path },
+            { model: EEtapa,                  path: e_etapas_path },
+            { model: EFase,                   path: e_fases_path },
+            { model: EFormaAcesso,            path: e_formas_acessos_path },
+            { model: EModalidade,             path: e_modalidades_path },
+            { model: EModeloOferta,           path: e_modelos_ofertas_path },
+            { model: ENivel,                  path: e_niveis_path },
+            { model: ENormatizacao,           path: e_normatizacoes_path },
+            { model: EPeriodoLetivo,          path: e_periodos_letivos_path },
+            { model: EStatusMatrizCurricular, path: e_status_matrizes_curriculares_path },
+            { model: ETipoAtoNormativo,       path: e_tipos_atos_normativos_path },
+            { model: ETipoBase,               path: e_tipos_bases_path },
+            { model: EBase,                   path: e_bases_path },
+            { model: ETipoAula,               path: e_tipos_aulas_path },
+            { model: ETurno,                  path: e_turnos_path },
+            { model: ETipoCampoAtuacao,       path: e_tipos_campos_atuacoes_path },
+            { model: EObrigatoriedade,        path: e_obrigatoriedades_path },
+            { model: ETipoMatriz,             path: e_tipos_matrizes_path },
+            { model: ETipoNae,                path: e_tipos_nae_path }
+          ] %>
+      <% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+      <% if visible_nav_itens.any? %>
+        <li class="nav-item nav-item-submenu">
+          <a class="nav-link <%= " active" if gestao_escolar.include?(params[:controller]) %>" id="gestao_escolar-link">
+            <i class="ph-books"></i>
+            <span>Gestão Escolar</span>
+          </a>
+          <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="gestao_escolar-collapse">
+            <% visible_nav_itens.each do |link| %>
+              <li class="nav-item">
+                <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+  <li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link" id="veiculo-link" style="padding-left: 40px !important;">
+      <i class="ph-car"></i>
+      <span>Frotas</span>
+    </a>
+    <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="veiculo-collapse">
+      <% links = [
+            { model: VTipoVeiculo,            path: v_tipo_veiculos_path },
+            { model: VTipoCombustivelVeiculo, path: v_tipo_combustivel_veiculos_path },
+            { model: VTipoCambioVeiculo,      path: v_tipo_cambio_veiculos_path },
+            { model: VTipoCarroceriaVeiculo,  path: v_tipo_carroceria_veiculos_path },
+            { model: VCorVeiculo,             path: v_cor_veiculos_path },
+            { model: VFabricanteVeiculo,      path: v_fabricante_veiculos_path },
+          ] %>
+      <% links.each do |link| %>
+        <% if can? :index, link[:model] %>
+          <li class="nav-item">
+            <%= link_to t("activerecord.models.#{link[:model].model_name.i18n_key}.other"), link[:path], class: "nav-link" %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </li>
+  <li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link" id="config-link" data-no-close style="padding-left: 40px !important;">
+      <i class="ph-cards"></i>
+      <span>
+        Matriculas
+      </span>
+    </a>
+    <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="config-collapse">
+      <li class="nav-item nav-item-submenu">
+        <% links = [
+            { model: MDeficiencia,              path: m_deficiencias_path },
+            { model: MEscola,                   path: m_escolas_path },
+            { model: MGenero,                   path: m_generos_path },
+            { model: MModalidade,               path: m_modalidades_path },
+            { model: MNecessidadeEspecifica,    path: m_necessidades_especificas_path },
+            { model: MRacaCor,                  path: m_racas_cores_path },
+            { model: MRecurso,                  path: m_recursos_path },
+            { model: MNacionalidade,            path: m_nacionalidades_path },
+            { model: MSerieAno,                 path: m_series_anos_path },
+            { model: MStatus,                   path: m_status_index_path },
+            { model: MTransporteEscolarPublico, path: m_transporte_escolar_publicos_path },
+            { model: MTurno,                    path: m_turnos_path }
+          ] %>
+        <% visible_nav_itens = links %>
+        <% if visible_nav_itens.any? %>
+          <% visible_nav_itens.each do |link| %>
+            <li class="nav-item">
+              <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}" do %>
+                <%= t("activerecord.models.#{link[:model].model_name.i18n_key}.other") %>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </li>
+    </ul>
+  </li>
+  <li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link" id="config-link" data-no-close style="padding-left: 40px !important;">
+      <i class="ph-package "></i>
+      <span>
+        Inventários
+      </span>
+    </a>
+    <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="config-collapse">
+      <li class="nav-item nav-item-submenu">
+        <% links = [
+            { model: LTipoInventario,               path: l_tipos_inventarios_path  },
+            { model: LStatusInventario,             path: l_status_inventarios_path },
+            { model: LCargoComissao,                path: l_cargos_comissoes_path   },
+            { model: LTipoNotaAjuste,               path: l_tipo_nota_ajustes_path  }
+          ] %>
+        <% visible_nav_itens = links %>
+        <% if visible_nav_itens.any? %>
+          <% visible_nav_itens.each do |link| %>
+            <li class="nav-item">
+              <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}" do %>
+                <%= t("activerecord.models.#{link[:model].model_name.i18n_key}.other") %>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </li>
+    </ul>
+  </li>
+  <li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link" id="config-link" data-no-close style="padding-left: 40px !important;">
+      <i class="ph-package "></i>
+      <span>
+        Boletins Mensais
+      </span>
+    </a>
+    <ul class="nav-group-sub collapse bg-black bg-opacity-20" id="config-collapse">
+      <li class="nav-item nav-item-submenu">
+        <% links = [
+            { model: BTipoDocumento,                path: b_tipo_documentos_path  },
+            { model: BTipoOcorrencia,               path: b_tipo_ocorrencias_path },
+            { model: BCalendario,                   path: b_calendarios_path }
+          ] %>
+        <% visible_nav_itens = links %>
+        <% if visible_nav_itens.any? %>
+          <% visible_nav_itens.each do |link| %>
+            <li class="nav-item">
+              <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}" do %>
+                <%= t("activerecord.models.#{link[:model].model_name.i18n_key}.other") %>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </li>
+    </ul>
+  </li>
+</li>
+<script>
+  $(document).ready(function() {
+    // Função para lidar com o clique nos collapses
+    $('.nav-link').on('click', function() {
+      // Fecha todos os siblings do collapse clicado
+      $(this).parent().siblings().find('.collapse').collapse('hide');
+
+          // Se o collapse clicado não for o configurado para não fechar
+          if (!$(this).attr('data-no-close')) {
+            // Fecha o collapse pai, exceto se for o collapse configurado para não fechar
+            $(this).closest('.nav-group-sub').siblings().find('.collapse').collapse('hide');
+          }
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function() {
+        // Function to handle the activation of links
+        function activateLink(event) {
+          // Remove active class from all links
+          document.querySelectorAll(".nav-link").forEach(link => {
+            link.classList.remove("active");
+          });
+
+          // Add active class to the clicked link
+          event.target.classList.add("active");
+
+          // Save the active link's ID in localStorage
+          localStorage.setItem("activeLink", event.target.id);
+
+          // Save the state of all collapsible menus
+          const collapses = document.querySelectorAll(".collapse");
+          collapses.forEach(collapse => {
+            if (collapse.classList.contains("show")) {
+              localStorage.setItem(collapse.id, "true");
+            } else {
+              localStorage.removeItem(collapse.id);
+            }
+          });
+        }
+
+        // Attach click event listener to all nav-links
+        document.querySelectorAll(".nav-link").forEach(link => {
+          link.addEventListener("click", activateLink);
+        });
+
+        // Restore the active link and collapse state from localStorage
+        const activeLinkId = localStorage.getItem("activeLink");
+
+        if (activeLinkId) {
+          const activeLink = document.getElementById(activeLinkId);
+          if (activeLink) {
+            activeLink.classList.add("active");
+          }
+        }
+
+        const collapses = document.querySelectorAll(".collapse");
+        collapses.forEach(collapse => {
+          const shouldShow = localStorage.getItem(collapse.id) === "true";
+          if (shouldShow) {
+            collapse.classList.add("show");
+          } else {
+            collapse.classList.remove("show");
+          }
+        });
+      });
+</script>

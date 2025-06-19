@@ -1,0 +1,18 @@
+<% links = [
+  { controller: "m_periodos_letivos",               model: MPeriodoLetivo,             icon: "ph-calendar",           path: m_periodos_letivos_path },
+  { controller: "series_inscritos",                 model: MSerieInscrito,             icon: "ph-student",            path: m_series_inscritos_path },
+  { controller: "m_turmas_series",                  model: MTurmaSerie,                icon: "ph-chalkboard-teacher", path: m_turmas_series_path },
+  { controller: "m_pessoas",                        model: MPessoa,                    icon: "ph-users",              path: m_pessoas_path },
+  { controller: "m_integracoes_matriculas_diarios", model: MIntegracaoMatriculaDiario, icon: "ph-arrows-clockwise",   path: m_integracoes_matriculas_diarios_path }
+] %>
+<% visible_nav_itens = links %>
+<% if visible_nav_itens.any? %>
+  <% visible_nav_itens.each do |link| %>
+    <li class="nav-item">
+      <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}", style: "padding-left: 40px !important;" do %>
+        <i class="<%= link[:icon] %>"></i>
+        <%= t("activerecord.models.#{link[:model].model_name.i18n_key}.other") %>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

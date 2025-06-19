@@ -1,0 +1,44 @@
+<% links = [
+  { controller: "e_atos_normativos",         model: EAtoNormativo,         icon: "ph-newspaper",          path: e_atos_normativos_path },
+  { controller: "g_indices_socioeconomicos", model: GIndiceSocioeconomico, icon: "ph-chart-line-up",      path: g_indices_socioeconomicos_path },
+  { controller: "e_matrizes_curriculares",   model: EMatrizCurricular,     icon: "ph-clipboard-text",     path: e_matrizes_curriculares_path },
+  { controller: "i_predios",                 model: IPredio,               icon: "ph-graduation-cap",     path: escolas_i_predios_path, label: "Escolas" },
+  { controller: "e_migracao_diarios",        model: EMigracaoDiario,       icon: "ph-arrows-clockwise",   path: e_migracao_diarios_path },
+  { controller: "e_regimentos",              model: ERegimento,            icon: "ph-scroll",             path: e_regimentos_path },
+  { controller: "e_gestao_vagas",            model: EGestaoVaga,           icon: "ph-users-three",        path: e_gestao_vagas_path },
+  { controller: "e_gestao_vagas_super",      model: EGestaoVagaSuper,      icon: "ph-users-four",         path: e_gestao_vagas_super_path },
+  { controller: "e_gestao_matriculas",       model: EGestaoMatricula,      icon: "ph-student",            path: e_gestao_matriculas_path },
+  { controller: "e_gestao_professores",      model: EGestaoProfessor,      icon: "ph-chalkboard-teacher", path: e_gestao_professores_path },
+  { controller: "e_analise_nutricionais",    model: EAnaliseNutricional,   icon: "ph-fork-knife",         path: e_analise_nutricionais_path }
+] %>
+<% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+<% if visible_nav_itens.any? %>
+  <% visible_nav_itens.each do |link| %>
+    <li class="nav-item">
+      <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}", style: "padding-left: 40px !important;" do %>
+        <i class="<%= link[:icon] %>"></i>
+        <%= link[:label] || t("activerecord.models.#{link[:model].model_name.i18n_key}.other") %>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>
+<li class="nav-item nav-item-submenu">
+  <a class="nav-link <%= "active" if "relatorios".include?(params[:controller] ) %>" style="padding-left: 40px !important;">
+    <i class="ph-percent"></i>
+    <span>
+      ICMS
+    </span>
+  </a>
+  <ul class="nav-group-sub collapse bg-black bg-opacity-20">
+    <li class="nav-item">
+      <%= link_to index_relatorio_sgis_path, class: "nav-link" do %>
+        Escolar
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to index_relatorio_sedam_path, class: "nav-link" do %>
+        SEDAM
+      <% end %>
+    </li>
+  </ul>
+</li>

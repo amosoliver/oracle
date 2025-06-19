@@ -1,0 +1,10 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= @e_tema.descricao.titleize %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to edit_e_tipo_campo_atuacao_e_tema_path(@e_tipo_campo_atuacao, @e_tema), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+  </div>
+</div>

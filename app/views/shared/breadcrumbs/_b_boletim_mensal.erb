@@ -1,0 +1,10 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= "#{@b_boletim_mensal.r_lotacao_organizacional.r_contrato_servidor.g_pessoa.nome.titleize} - #{@b_boletim_mensal.b_calendario.ano_mes}" %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to b_boletim_mensal_b_ocorrencias_path(@b_boletim_mensal), class: "dropdown-item" do %>
+      <i class="ph-calendar-x me-2"></i> Ocorrências
+    <% end %>
+  </div>
+</div>

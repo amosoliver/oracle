@@ -1,0 +1,12 @@
+<% links = [{ controller: "a_acordaos", model: AAcordao, icon: "ph-scales", path: a_acordaos_path }] %>
+<% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+<% if visible_nav_itens.any? %>
+  <% visible_nav_itens.each do |link| %>
+    <li class="nav-item">
+      <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}" do %>
+        <i class="<%= link[:icon] %>"></i>
+        <%= t("activerecord.models.#{link[:model].model_name.i18n_key}.other") %>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

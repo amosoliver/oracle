@@ -1,0 +1,10 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= @e_turma.e_matriz_aplicada.descricao.titleize %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-end " style="">
+    <%= link_to i_predio_e_matriz_aplicada_e_turma_path(@i_predio, @e_matriz_aplicada, @i_ambiente_predial), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+  </div>
+</div>

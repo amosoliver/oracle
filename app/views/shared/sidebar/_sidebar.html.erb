@@ -1,0 +1,75 @@
+<div class="sidebar sidebar-dark sidebar-main sidebar-expand-xl" style="background: #005171; width: 250px;">
+  <div class="sidebar-content">
+    <div class="sidebar-section">
+      <div class="sidebar-section-body d-flex justify-content-center">
+        <h5 class="sidebar-resize-hide flex-grow-1 my-auto"><b>Menu</b></h5>
+        <div>
+          <button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-xl-none">
+            <i class="ph-x"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Barra de pesquisa -->
+    <div class="sidebar-section-body">
+      <div class="form-control-feedback form-control-feedback-end">
+        <input type="search" id="sidebar-search-input" class="form-control" placeholder="Pesquisar" onkeyup="filterSidebar()">
+        <div class="form-control-feedback-icon">
+          <i class="ph-magnifying-glass opacity-50"></i>
+        </div>
+      </div>
+    </div>
+    <!-- Itens da sidebar -->
+    <div class="sidebar-section">
+      <ul class="nav nav-sidebar" data-nav-type="accordion" id="sidebar-items">
+        <li class="nav-item">
+          <a href="/" class="nav-link <%= "active" if params[:controller] == "home" %>">
+            <i class="ph-house"></i>
+            <span>Home</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const sidebarSearchInput = document.getElementById('sidebar-search-input');
+      const navItems = document.querySelectorAll('#sidebar-items .nav-item, #sidebar-items .nav-item-header');
+      const submenus = document.querySelectorAll('.nav-group-sub');
+
+      submenus.forEach(submenu => submenu.classList.remove('show'));
+
+      sidebarSearchInput.addEventListener('input', filterSidebar);
+      document.addEventListener('keydown', handleShortcut);
+
+      function filterSidebar() {
+          const filter = normalizeText(sidebarSearchInput.value.toLowerCase());
+          
+          navItems.forEach(item => {
+              const text = normalizeText(item.textContent.toLowerCase());
+              const submenu = item.querySelector('.nav-group-sub');
+              const shouldDisplay = text.includes(filter);
+
+              item.style.display = shouldDisplay ? '' : 'none';
+              if (submenu) submenu.classList.toggle('show', shouldDisplay);
+          });
+
+          if (!filter) {
+              submenus.forEach(submenu => submenu.classList.remove('show'));
+          }
+      }
+
+      function normalizeText(text) {
+          return text.normalize("NFD").replace(/[̀-ͯ]/g, "");
+      }
+
+      function handleShortcut(event) {
+          if (event.ctrlKey && event.key.toLowerCase() === 'k') {
+              event.preventDefault();
+              sidebarSearchInput.focus();
+          }
+      }
+  });
+
+</script>

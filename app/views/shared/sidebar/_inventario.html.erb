@@ -1,0 +1,17 @@
+<% links = [
+  { controller: "l_almoxarifados",    model: LAlmoxarifado,   icon: "", path: l_almoxarifados_path },
+  { controller: "l_comissoes_inventarios",   model: LComissaoInventario, icon: "", path: l_comissoes_inventarios_path },
+  { controller: "l_notas_ajustes_inventarios",   model: LNotaAjusteInventario, icon: "", path: l_notas_ajustes_inventarios_path },  
+] %>
+<% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+<% if visible_nav_itens.any? %>
+  <% visible_nav_itens.each do |link| %>
+    <li class="nav-item">
+      <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}" , style: "padding-left: 40px !important;", 
+        data: (link[:status] ? { status: link[:status] } : {}) do %>
+        <i class="<%= link[:icon] %>"></i>
+        <%= t("activerecord.models.#{link[:model].model_name.i18n_key}.other") %>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

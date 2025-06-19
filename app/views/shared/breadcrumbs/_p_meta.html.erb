@@ -1,0 +1,16 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= @p_equipe.nome %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to edit_p_equipe_path(@p_equipe), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+    <%= link_to p_equipe_p_equipe_servidores_path(@p_equipe), class: "dropdown-item" do %>
+      <i class="ph-users-three me-2"></i> Membros
+    <% end %>
+    <%= link_to p_equipe_p_metas_path(@p_equipe), class: "dropdown-item" do %>
+      <i class="ph-calendar-check me-2"></i> Metas
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+  <%= link_to "Ações",  p_equipe_p_meta_p_acoes_path(@p_equipe,@p_meta,@p_acao), class: "breadcrumb-item text-dark"%>
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= @p_acao.descricao.truncate(25) %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to edit_p_equipe_p_meta_p_acao_path(@p_equipe,@p_meta,@p_acao), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+    <%= link_to p_equipe_p_meta_p_acao_p_indicadores_path(@p_equipe), class: "dropdown-item" do %>
+      <i class="ph-chart-line me-2"></i> Indicadores
+    <% end %>
+  </div>
+</div>

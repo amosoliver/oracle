@@ -1,0 +1,17 @@
+<% links = [
+  { controller: "v_agendamento_veiculos",                model: VAgendamentoVeiculo,     icon: "ph ph-suitcase",       path: v_agendamento_veiculos_path, name: "Viagens - Agendamentos" },
+  { controller: "v_agendamento_autorizacoes",            model: VAgendamentoAutorizacao, icon: "ph ph-calendar-check", path: v_agendamento_autorizacoes_path(status: 1), status: 1, name: "Autorização" },
+  { controller: "v_agendamento_autorizacao_itinerarios", model: VAgendamentoAutorizacao, icon: "ph ph-clock",          path: itinerario_v_agendamento_autorizacoes_path, name: "Itinerário" }
+] %>
+<% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+<% if visible_nav_itens.any? %>
+  <% visible_nav_itens.each do |link| %>
+    <li class="nav-item">
+      <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}", style: "padding-left: 40px !important;" ,  
+        data: (link[:status] ? { status: link[:status] } : {}) do %>
+        <i class="<%= link[:icon] %>"></i>
+        <%= link[:name] %>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

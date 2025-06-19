@@ -1,0 +1,16 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= @r_contrato_servidor.present? ? "#{@r_contrato_servidor.matricula.titleize} - #{@r_contrato_servidor.g_pessoa.nome.titleize}"  : ''%>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to edit_r_contrato_servidor_path(@r_contrato_servidor), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+    <%= link_to r_contrato_servidor_r_historico_ocorrencia_servidores_path(@r_contrato_servidor), class: "dropdown-item" do %>
+      <i class="ph-suitcase-simple me-2"></i> Histórico de Ocorrências
+    <% end %>
+    <%= link_to r_contrato_servidor_r_professores_formadores_path(@r_contrato_servidor), class: "dropdown-item" do %>
+      <i class="ph-suitcase-simple me-2"></i> Professor Formador
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= truncate(@e_matriz_curricular.descricao.titleize.upcase, length: 60) %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to edit_e_matriz_curricular_path(@e_matriz_curricular), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+    <%= link_to e_matriz_curricular_e_periodos_grades_path(@e_matriz_curricular), class: "dropdown-item" do %>
+      <i class="ph-plus-circle me-2"></i> Periodos Grades
+    <% end %>
+  </div>
+</div>

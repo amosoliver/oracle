@@ -1,0 +1,41 @@
+<% content_for :context_nav do %>
+  <div class="page-header page-header-light shadow">
+    <div class="page-header-content">
+      <div class="d-flex align-items-center justify-content-between gap-1">
+        <div class="page-title">
+          <div class="d-inline-flex align-items-center">
+            <i class="ph-arrow-circle-left fs-1 me-2 hand-pointer" onclick="window.history.back();"></i>
+            <h4 class="mb-0"><%= title %></h4>
+          </div>
+        </div>
+        <div class="itens-align-right">
+        <div class="d-flex flex-nowrap gap-2 me-auto ms-2">
+          <div class="btn btn-<%= faltas_pendentes.zero? ? "success" : "danger" %>">
+            <i class="ph-warning-circle me-1"></i> Faltas pendentes de lançamento: <%= faltas_pendentes %>
+          </div>
+          <div class="btn btn-<%= frequencia_sem_ocorrencia.zero? ? "success" : "danger" %>">
+            <i class="ph-check-circle me-1"></i> Frequências pendentes: <%= frequencia_sem_ocorrencia %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-header-content d-lg-flex border-top">
+      <div class="d-flex">
+        <div class="breadcrumb py-2">
+          <a href="/" class="breadcrumb-item"><i class="ph-house"></i></a>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-warning alert-icon-start alert-dismissible fade show mt-3 d-flex align-items-center text-start">
+      <span class="alert-icon bg-warning text-white d-flex align-items-center justify-content-center me-2">
+        <i class="ph-warning-circle fs-4"></i>
+      </span>
+      <div>
+        <span class="fw-semibold">Atenção:</span>
+        Para habilitar o botão <span class="fw-semibold">Homologar</span>, <b>os campos de faltas</b> devem estar todos preenchidos. No caso das <b>frequências</b>, podem ficar em branco, mas devem conter ao menos 1 ocorrência registrada de modo que justifique a ausência. Se o botão não habilitar, atualize a página.
+      </div>
+    </div>
+  </div>
+<% end %>

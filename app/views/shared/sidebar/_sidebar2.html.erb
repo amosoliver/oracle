@@ -1,0 +1,57 @@
+<div class="sidebar sidebar-dark sidebar-main sidebar-expand-xl" style="background: #005171;">
+  <div class="sidebar-content">
+    <div class="sidebar-section">
+      <div class="sidebar-section-body d-flex justify-content-center">
+        <h5 class="sidebar-resize-hide flex-grow-1 my-auto"><b>Menu</b></h5>
+        <div>
+          <button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-xl-none">
+            <i class="ph-x"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Barra de pesquisa -->
+    <div class="sidebar-section-body">
+      <div class="form-control-feedback form-control-feedback-end">
+        <input type="search" id="sidebar-search-input" class="form-control" placeholder="Pesquisar" onkeyup="filterSidebar()">
+        <div class="form-control-feedback-icon">
+          <i class="ph-magnifying-glass opacity-50"></i>
+        </div>
+      </div>
+    </div>
+    <!-- Itens da sidebar -->
+    <div class="sidebar-section">
+      <ul class="nav nav-sidebar" data-nav-type="accordion" id="sidebar-items">
+        <li class="nav-item">
+          <a href="/l_almoxarifados" class="nav-link <%= "active" if params[:controller] == "l_almoxarifados" %>">
+            <i class="ph-house"></i>
+            <span>Almoxarifados</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/l_comissoes_inventarios" class="nav-link <%= "active" if params[:controller] == "l_comissoes_inventarios" %>">
+            <i class="ph-house"></i>
+            <span>Invetários/Comissões</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/l_notas_ajustes_inventarios" class="nav-link <%= "active" if params[:controller] == "l_nota_ajuste_inventario" %>">
+            <i class="ph-house"></i>
+            <span>Notas de Empenho</span>
+          </a>
+        </li>
+        <li class="nav-item nav-item-submenu">
+          <a href="#" class="nav-link" id="config-link" data-no-close>
+            <i class="ph-house"></i>
+            <span>
+              Referenciais
+            </span>
+          </a>
+          <ul class="nav-group-sub collapse" id="config-collapse">
+            <%= render "shared/sidebar/referenciais_inventario" %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= @e_ato_normativo.descricao.titleize %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to edit_e_ato_normativo_path(@e_ato_normativo), class: "dropdown-item" do %>
+      <i class="ph-pen me-2"></i> Editar
+    <% end %>
+    <%= link_to e_ato_normativo_e_servicos_educacionais_path(@e_ato_normativo), class: "dropdown-item" do %>
+      <i class="ph-cube me-2"></i> Servico Educacional
+    <% end %>
+  </div>
+</div>

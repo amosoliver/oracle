@@ -1,0 +1,10 @@
+<div class="breadcrumb-item dropdown">
+  <a href="#" class="breadcrumb-item dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= truncate(@i_predio.nome_fantasia.titleize.upcase, length: 60) %>
+  </a>
+  <div class="dropdown-menu" style="">
+    <%= link_to i_predio_e_matrizes_aplicadas_path(@i_predio), class: "dropdown-item" do %>
+      <i class="ph-clipboard-text me-2"></i> Matrizes Aplicadas
+    <% end %>
+  </div>
+</div>

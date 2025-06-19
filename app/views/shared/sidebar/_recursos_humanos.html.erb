@@ -1,0 +1,40 @@
+<% links = [
+  { controller: "g_pessoas",                              model: GPessoa,                           icon: "ph-users",              path: g_pessoas_path },
+  { controller: "r_gestao_horas_extras",                  model: RGestaoHoraExtra,                  icon: "ph-timer",              path: r_gestao_horas_extras_path },
+  { controller: "r_avaliacoes",                           model: RAvaliacao,                        icon: "ph-list-checks",        path: r_avaliacoes_path },
+  { controller: "r_contrato_servidores",                  model: RContratoServidor,                 icon: "ph-user-list",          path: r_contrato_servidores_path },
+  { controller: "r_contrato_servidores_externos",         model: RContratoServidorExterno,          icon: "ph-user-plus",          path: r_contrato_servidores_externos_path },
+  { controller: "r_estagios",                             model: REstagio,                          icon: "ph-line-segments",      path: r_estagios_path },
+  { controller: "r_lotacao_organizacionais_homologacoes", model: RLotacaoOrganizacionalHomologacao, icon: "ph-check-square",       path: r_lotacao_organizacionais_homologacoes_path },
+  { controller: "r_lotacao_organizacionais",              model: RLotacaoOrganizacional,            icon: "ph-buildings",          path: r_lotacao_organizacionais_path },
+  { controller: "r_registro_movimentacoes",               model: RRegistroMovimentacao,             icon: "ph-user-switch",        path: r_registro_movimentacoes_path },
+  { controller: "r_aposentadorias",                       model: RAposentadoria,                    icon: "ph-eyeglasses",         path: r_aposentadorias_path },
+  { controller: "r_organizacionais",                      model: ROrganizacional,                   icon: "ph-diamonds-four",      path: r_organizacionais_path },
+  { controller: "r_origens_destinos",                     model: ROrigensDestino,                   icon: "ph-swap",               path: r_origens_destinos_path },
+  { controller: "r_laudo_servidores",                     model: RLaudoServidor,                    icon: "ph-first-aid-kit",      path: r_laudo_servidores_path },
+  { controller: "r_pesquisa_respondidas",                 model: RPesquisaRespondida,               icon: "ph-clipboard-text",     path: r_pesquisa_respondidas_path },
+  { controller: "r_averbacoes",                           model: RAverbacao,                        icon: "ph-pencil-line",        path: r_averbacoes_path }
+] %>
+<% visible_nav_itens = links.select { |link| can?(:index, link[:model]) } %>
+<% if visible_nav_itens.any? %>
+  <% visible_nav_itens.each do |link| %>
+    <li class="nav-item">
+      <%= link_to link[:path], class: "nav-link #{'active' if params[:controller] == link[:controller]}", style: "padding-left: 40px !important;" do %>
+        <i class="<%= link[:icon] %>"></i>
+        <%= t("activerecord.models.#{link[:model].model_name.i18n_key}.other") %>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>
+<% if can? :grafico, GListaOrganizacional %>
+  <li class="nav-item nav-item-submenu">
+    <li class="nav-item">
+      <%= link_to g_listas_organizacionais_grafico_path, class: "nav-link", target: "_blank", style: "padding-left: 40px !important;" do %>
+        <i class="ph-tree-structure"></i>
+        <span>
+          Estrutura organizacional
+        </span>
+      <% end %>
+    </li>
+  </li>
+<% end %>
